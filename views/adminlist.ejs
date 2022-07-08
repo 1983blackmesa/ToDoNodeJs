@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/main.css">	
+<link rel="stylesheet" href="../css/styles.css">	
+</head>
+
+<body>
+<header class="bg-lighter mb-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <nav class="navbar justify-content-between">
+            
+	   
+	  <section class="todo-outer">
+    <div class="container">
+      <div class="row justify-content-md-center">
+	  
+        <div class="col-sm-12 col-md-8">
+            <h1><center><%= myDate %></center></h1>
+            <h1><center><%= listTitle %></center></h1>
+
+           
+              <form action="/logout?_method=DELETE" method="POST">
+                  <p><button type="submit" class="btn btn-primary">Log Out</button></p>
+              </form>
+
+              
+
+              <form class="item" action="/:*" method="get">
+                <div class="note"> 
+                    <input type="text" class="form-control" name="addTask" placeholder="Create Custom List" autocomplete="off">
+                <p><button type="submit" class="btn btn-primary mr-sm-2">+</button> </p>
+              </div>
+              </form>
+         
+
+          <div class="todo-inner">
+            <div class="form-row">
+              <div class="col-8 mr-sm-2">
+               
+
+                <% if (newListItems.length===0) {%>
+                    <p>
+                        No Task Added Yet
+                    </p>
+
+                    <% } else { %>
+
+                    <% for(let i=0;i<newListItems.length;i++) { %>
+                
+                    <form action="/delete" method="post">
+
+                        <input type="checkbox" name="checkbox" value=<%= newListItems[i]._id %> onChange="this.form.submit()">       
+                            
+                        <%= newListItems[i].name %>
+                        <input type="hidden" name="listName" value=<%= listTitle %>></input> <!-- hidden -->
+                        
+                                                
+                       <!--  <a href="/edit/<%=newListItems[i]._id%>" class="btn btn-warning btn-sm">Edit</a> -->
+   
+                         
+                    </form>
+                    
+                   
+                    <% }  %>
+                    <% } %>
+
+                    
+
+                <form class="item" action="/" method="post">
+                <input type="text" class="form-control" name="addTask" placeholder="Add Task" autocomplete="off">
+               
+              </div>
+              <button type="submit" name="mylist" value=<%= listTitle %> class="btn btn-success mr-sm-2">+</button>
+              <!--<button type="button" name="button" class="btn btn-success mr-sm-2" id="SaveTask" style="display: none;">Save Task</button> -->
+            </form>
+
+            
+			  
+           
+
+            </div>
+			<!--
+            <div class="to-do-output">
+              <table class="table table-striped mt-3 mb-0" id="addedtasklist">
+                 <div id="listBox"></div>
+              </table>
+            </div>
+        -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>	
+	  
+	   
+		 </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+	
+ 
+  
+
+</body>
+</html>
